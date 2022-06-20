@@ -27,12 +27,11 @@ SELECT title, COUNT(*)
 	FROM genre g
 	JOIN genre_singers gs ON g.id_genre = gs.id_genre
 	GROUP BY g.id_genre;
-	
-SELECT a.year_production, COUNT(*)
-	FROM tracks t
-	JOIN albums a ON t.id_album = a.id_album
-	GROUP BY a.year_production
-	HAVING a.year_production BETWEEN 2019 AND 2020;
+
+SELECT COUNT(t.id_track) 
+	FROM tracks t 	
+	JOIN albums a ON t.id_album = a.id_album 
+	WHERE year_production BETWEEN 2019 AND 2020;
 
 SELECT a.title, AVG(duration)  
 	FROM albums a
@@ -43,8 +42,11 @@ SELECT DISTINCT name
 	FROM singers s
 	JOIN albums_and_singers aas ON s.id = aas.id_sing
 	JOIN albums a ON aas.id_album = a.id_album
-	GROUP BY a.year_production, name
-	HAVING a.year_production != 2020; 
+	WHERE s.name NOT IN (SELECT DISTINCT name
+	FROM singers s
+	JOIN albums_and_singers aas ON s.id = aas.id_sing
+	JOIN albums a ON aas.id_album = a.id_album
+	WHERE a.year_production=2020);
 
 SELECT c.title
 	FROM collection c
@@ -73,9 +75,14 @@ SELECT name
 	JOIN tracks t ON aas.id_album = t.id_album
 	WHERE duration = (SELECT MIN(duration) FROM tracks);
 
-SELECT  a.title
+
+SELECT a.title
 	FROM albums a
 	JOIN tracks t ON a.id_album = t.id_album
-	GROUP BY a.id_album
-	ORDER BY COUNT(t.id_track)
-	LIMIT 2; 	
+	GROUP BY t.id_album, a.title
+	HAVING COUNT(id_track) = (SELECT COUNT(id_track)
+	FROM albums a
+	JOIN tracks t ON a.id_album = t.id_album
+	GROUP BY t.id_album, t.title
+	ORDER BY COUNT(id_track)
+    LIMIT 1);

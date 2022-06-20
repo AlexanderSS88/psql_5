@@ -7,7 +7,8 @@ VALUES
 	('Nick Rosentahl'),
 	('Paul Oakenfold'),
 	('Ferry Corsten'),
-	('David Guetta');
+	('David Guetta'),
+	('Kimi Raykonen');
 
 INSERT INTO Genre(title)
 VALUES
@@ -26,7 +27,9 @@ VALUES
 	('Duckling', 2020),
 	('Meteora', 2019),
 	('Hero', 2010),
-	('The Star', 2003);
+	('The Star', 2003),
+	('Racer', 2014),
+	('Sleapstream', 2020);
 
 INSERT INTO Tracks(id_album, title, duration)
 VALUES
@@ -44,7 +47,9 @@ VALUES
 	(4, 'Green hill', '3:19'),
 	(8, 'Legendary', '3:30'),
 	(2, 'Robo', '3:03'),
-	(7, 'Total War', '2:49');
+	(7, 'Total War', '2:49'),
+	(9, 'Speedway', '3:33'),
+	(10, 'Nitro', '3:14');
 
 INSERT INTO Collection(title, year_production)
 VALUES
@@ -66,7 +71,8 @@ VALUES
 	(5, 5),
 	(3, 6),
 	(1, 7),
-	(5, 8);
+	(5, 8),
+	(1, 9);
 
 INSERT INTO Albums_and_singers
 VALUES
@@ -76,8 +82,10 @@ VALUES
 	(4, 3),
 	(5, 1),
 	(6, 2),
-	(7, 4),
-	(8, 6);
+	(7, 5),
+	(8, 6),
+	(9, 9),
+	(9, 10);
 
 INSERT INTO Collection_and_tracks
 VALUES
